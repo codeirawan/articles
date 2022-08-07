@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSuppliersTable extends Migration
+class CreateMasterArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSuppliersTable extends Migration
      */
     public function up()
     {
-        Schema::create('suppliers', function (Blueprint $table) {
+        Schema::create('master_articles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->char('telephone', 15);
-            $table->string('address');
-            $table->enum('type', ['Individual', 'PT', 'CV'])->default('Individual');
-            $table->char('npwp', 18);
+            $table->string('title');
+            $table->string('content');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -32,6 +29,6 @@ class CreateSuppliersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('suppliers');
+        Schema::dropIfExists('master_articles');
     }
 }

@@ -5,29 +5,29 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laratrust, DataTables, Lang;
-use App\Models\Master\Position;
+use App\Models\Master\Article;
 
-class PositionController extends Controller
+class ArticleController extends Controller
 {
     public function index()
     {
-        if (!Laratrust::isAbleTo('view-position')) return abort(404);
+        if (!Laratrust::isAbleTo('view-article')) return abort(404);
 
-        return view('master.position.index');
+        return view('master.article.index');
     }
 
     public function data()
     {
-        if (!Laratrust::isAbleTo('view-position')) return abort(404);
+        if (!Laratrust::isAbleTo('view-article')) return abort(404);
 
-        $positions = Position::select('id', 'name');
+        $articles = Article::select('id', 'title', 'content');
 
-        return DataTables::of($positions)
-            ->addColumn('action', function($position) {
-                $edit = '<a href="' . route('master.position.edit', $position->id) . '" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-tooltip" title="' . Lang::get('Edit') . '"><i class="la la-edit"></i></a>';
-                $delete = '<a href="#" data-href="' . route('master.position.destroy', $position->id) . '" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-tooltip" title="' . Lang::get('Delete') . '" data-toggle="modal" data-target="#modal-delete" data-key="' . $position->name . '"><i class="la la-trash"></i></a>';
+        return DataTables::of($articles)
+            ->addColumn('action', function($article) {
+                $edit = '<a href="' . route('master.article.edit', $article->id) . '" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-tooltip" title="' . Lang::get('Edit') . '"><i class="la la-edit"></i></a>';
+                $delete = '<a href="#" data-href="' . route('master.article.destroy', $article->id) . '" class="btn btn-sm btn-clean btn-icon btn-icon-md btn-tooltip" title="' . Lang::get('Delete') . '" data-toggle="modal" data-target="#modal-delete" data-key="' . $article->title . '"><i class="la la-trash"></i></a>';
 
-                return (Laratrust::isAbleTo('update-position') ? $edit : '') . (Laratrust::isAbleTo('delete-position') ? $delete : '');
+                return (Laratrust::isAbleTo('update-article') ? $edit : '') . (Laratrust::isAbleTo('delete-article') ? $delete : '');
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -35,62 +35,66 @@ class PositionController extends Controller
 
     public function create()
     {
-        if (!Laratrust::isAbleTo('create-position')) return abort(404);
+        if (!Laratrust::isAbleTo('create-article')) return abort(404);
 
-        return view('master.position.create');
+        return view('master.article.create');
     }
 
     public function store(Request $request)
     {
-        if (!Laratrust::isAbleTo('create-position')) return abort(404);
+        if (!Laratrust::isAbleTo('create-article')) return abort(404);
 
         $this->validate($request, [
-            'nama' => ['required', 'string', 'max:255'],
+            'judul' => ['required', 'string', 'max:255'],
+            'konten' => ['required', 'string', 'max:255'],
         ]);
 
-        $position = new Position;
-        $position->name = $request->nama;
-        $position->save();
+        $article = new Article;
+        $article->title = $request->judul;
+        $article->content = $request->konten;
+        $article->save();
 
-        $message = Lang::get('Position') . ' \'' . $position->name . '\' ' . Lang::get('successfully created.');
-        return redirect()->route('master.position.index')->with('status', $message);
+        $message = Lang::get('Article') . ' \'' . $article->title . '\' ' . Lang::get('successfully created.');
+        return redirect()->route('master.article.index')->with('status', $message);
     }
 
     public function edit($id)
     {
-        if (!Laratrust::isAbleTo('update-position')) return abort(404);
+        if (!Laratrust::isAbleTo('update-article')) return abort(404);
 
-        $position = Position::select('id', 'name')->findOrFail($id);
+        $article = Article::select('id', 'title', 'content')->findOrFail($id);
 
-        return view('master.position.edit', compact('position'));
+        return view('master.article.edit', compact('article'));
     }
 
     public function update($id, Request $request)
     {
-        if (!Laratrust::isAbleTo('update-position')) return abort(404);
+        if (!Laratrust::isAbleTo('update-article')) return abort(404);
 
-        $position = Position::findOrFail($id);
+        $article = Article::findOrFail($id);
 
         $this->validate($request, [
-            'nama' => ['required', 'string', 'max:255'],
+            'judul' => ['required', 'string', 'max:255'],
+            'konten' => ['required', 'string', 'max:20000'],
         ]);
 
-        $position->name = $request->nama;
-        $position->save();
+        $article->title = $request->judul;
+        $article->content = $request->konten;
+        $article->save();
 
-        $message = Lang::get('Position') . ' \'' . $position->name . '\' ' . Lang::get('successfully updated.');
-        return redirect()->route('master.position.index')->with('status', $message);
+        $message = Lang::get('Article') . ' \'' . $article->title . '\' ' . Lang::get('successfully updated.');
+        return redirect()->route('master.article.index')->with('status', $message);
     }
 
     public function destroy($id)
     {
-        if (!Laratrust::isAbleTo('delete-position')) return abort(404);
+        if (!Laratrust::isAbleTo('delete-article')) return abort(404);
 
-        $position = Position::findOrFail($id);
-        $name = $position->name;
-        $position->delete();
+        $article = Article::findOrFail($id);
+        $title = $article->title;
+        $article->delete();
 
-        $message = Lang::get('Position') . ' \'' . $name . '\' ' . Lang::get('successfully deleted.');
-        return redirect()->route('master.position.index')->with('status', $message);
+        $message = Lang::get('Article') . ' \'' . $title . '\' ' . Lang::get('successfully deleted.');
+        return redirect()->route('master.article.index')->with('status', $message);
     }
 }

@@ -1,30 +1,30 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Edit') }} {{ __('Position') }} | {{ config('app.name') }}
+    {{ __('Edit') }} {{ __('Category') }} | {{ config('app.name') }}
 @endsection
 
 @section('subheader')
-    {{ __('Edit') }} {{ __('Position') }}
+    {{ __('Edit') }} {{ __('Category') }}
 @endsection
 
 @section('breadcrumb')
-    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.position.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Position') }}</a>
-    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.position.edit', $position->id) }}" class="kt-subheader__breadcrumbs-link">{{ $position->name }}</a>
+    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.category.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Category') }}</a>
+    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.category.edit', $category->id) }}" class="kt-subheader__breadcrumbs-link">{{ $category->name }}</a>
 @endsection
 
 @section('content')
-<form class="kt-form" id="kt_form_1" action="{{ route('master.position.update', $position->id) }}" method="POST">
+<form class="kt-form" id="kt_form_1" action="{{ route('master.category.update', $category->id) }}" method="POST">
     @method('PUT')
     @csrf
 
     <div class="kt-portlet" id="kt_page_portlet">
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
-                <h3 class="kt-portlet__head-title">{{ __('Edit') }} {{ __('Position') }}</h3>
+                <h3 class="kt-portlet__head-title">{{ __('Edit') }} {{ __('Category') }}</h3>
             </div>
             <div class="kt-portlet__head-toolbar">
-                <a href="{{ route('master.position.index') }}" class="btn btn-secondary kt-margin-r-10">
+                <a href="{{ route('master.category.index') }}" class="btn btn-secondary kt-margin-r-10">
                     <i class="la la-arrow-left"></i>
                     <span class="kt-hidden-mobile">{{ __('Back') }}</span>
                 </a>
@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <label for="nama">{{ __('Name') }}</label>
-                        <input id="nama" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama', $position->name) }}">
+                        <input id="nama" name="nama" type="text" class="form-control @error('nama') is-invalid @enderror" required value="{{ old('nama', $category->name) }}">
 
                         @error('nama')
                             <span class="invalid-feedback" role="alert">

@@ -20,21 +20,6 @@
                     </a>
                 </li>
 
-                <?php if (app('laratrust')->isAbleTo(['view-recruitment'])) : ?>
-                    <li class="kt-menu__section ">
-                        <h4 class="kt-menu__section-text"><?php echo e(__('Employee Management')); ?></h4>
-                        <i class="kt-menu__section-icon flaticon-more-v2"></i>
-                    </li>
-                <?php endif; // app('laratrust')->permission ?>
-                <?php if (app('laratrust')->isAbleTo('view-recruitment')) : ?>
-                    <li class="kt-menu__item <?php if(Request::is('recruitment*')): ?> kt-menu__item--here <?php endif; ?>" aria-haspopup="true">
-                        <a href="<?php echo e(route('recruitment.index')); ?>" class="kt-menu__link">
-                            <i class="kt-menu__link-icon fa fa-user-plus"></i>
-                            <span class="kt-menu__link-text"><?php echo e(__('Recruitment')); ?></span>
-                        </a>
-                    </li>
-                <?php endif; // app('laratrust')->permission ?>
-
                 <?php if (app('laratrust')->isAbleTo(['view-user', 'view-role'])) : ?>
                     <li class="kt-menu__section ">
                         <h4 class="kt-menu__section-text"><?php echo e(__('User Management')); ?></h4>
@@ -58,7 +43,7 @@
                     </li>
                 <?php endif; // app('laratrust')->permission ?>
 
-                <?php if (app('laratrust')->isAbleTo(['view-product-category', 'view-product-unit', 'view-payment-method', 'view-position', 'view-resume-source', 'view-file-type'])) : ?>
+                <?php if (app('laratrust')->isAbleTo(['view-category', 'view-article'])) : ?>
                     <li class="kt-menu__section ">
                         <h4 class="kt-menu__section-text"><?php echo e(__('Master Data Management')); ?></h4>
                         <i class="kt-menu__section-icon flaticon-more-v2"></i>
@@ -77,25 +62,21 @@
                                         <span class="kt-menu__link-text"><?php echo e(__('Master Data')); ?></span>
                                     </span>
                                 </li>
+                                <?php if (app('laratrust')->isAbleTo('view-category')) : ?>
                                 <li class="kt-menu__item <?php if(Request::is('master/category*')): ?> kt-menu__item--here <?php endif; ?>" aria-haspopup="true">
                                     <a href="<?php echo e(route('master.category.index')); ?>" class="kt-menu__link">
                                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                         <span class="kt-menu__link-text"><?php echo e(__('Category')); ?></span>
                                     </a>
                                 </li>
+                                <?php endif; // app('laratrust')->permission ?>
+                                <?php if (app('laratrust')->isAbleTo('view-article')) : ?>
                                 <li class="kt-menu__item <?php if(Request::is('master/article*')): ?> kt-menu__item--here <?php endif; ?>" aria-haspopup="true">
                                     <a href="<?php echo e(route('master.article.index')); ?>" class="kt-menu__link">
                                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                         <span class="kt-menu__link-text"><?php echo e(__('Article')); ?></span>
                                     </a>
                                 </li>
-                                <?php if (app('laratrust')->isAbleTo('view-position')) : ?>
-                                    <li class="kt-menu__item <?php if(Request::is('master/position*')): ?> kt-menu__item--here <?php endif; ?>" aria-haspopup="true">
-                                        <a href="<?php echo e(route('master.position.index')); ?>" class="kt-menu__link">
-                                            <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-                                            <span class="kt-menu__link-text"><?php echo e(__('Position')); ?></span>
-                                        </a>
-                                    </li>
                                 <?php endif; // app('laratrust')->permission ?>
                             </ul>
                         </div>

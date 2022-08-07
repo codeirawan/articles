@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Position') }} | {{ config('app.name') }}
+    {{ __('Article') }} | {{ config('app.name') }}
 @endsection
 
 @section('style')
@@ -9,11 +9,11 @@
 @endsection
 
 @section('subheader')
-    {{ __('Position') }}
+    {{ __('Article') }}
 @endsection
 
 @section('breadcrumb')
-    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.position.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Position') }}</a>
+    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.article.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Article') }}</a>
 @endsection
 
 @section('content')
@@ -22,9 +22,9 @@
         <div class="kt-portlet__content">
             @include('layouts.inc.alert')
 
-            @if (Laratrust::isAbleTo('create-position'))
-                <a href="{{ route('master.position.create') }}" class="btn btn-primary mb-4">
-                    <i class="fa fa-plus"></i> {{ __('New Position') }}
+            @if (Laratrust::isAbleTo('create-article'))
+                <a href="{{ route('master.article.create') }}" class="btn btn-primary mb-4">
+                    <i class="fa fa-plus"></i> {{ __('New Article') }}
                 </a>
             @endif
 
@@ -35,7 +35,7 @@
 @endsection
 
 @section('script')
-    @include('layouts.inc.modal.delete', ['object' => 'position'])
+    @include('layouts.inc.modal.delete', ['object' => 'article'])
 
     <script src="{{ asset(mix('js/datatable.js')) }}"></script>
     <script src="{{ asset(mix('js/tooltip.js')) }}"></script>
@@ -57,11 +57,12 @@
             },
             ajax: {
                 method: 'POST',
-                url: '{{ route('master.position.data') }}',
+                url: '{{ route('master.article.data') }}',
                 headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}' }
             },
             columns: [
-                { title: "{{ __('Name') }}", data: 'name', name: 'name', defaultContent: '-', class: 'text-center' },
+                { title: "{{ __('Title') }}", data: 'title', name: 'title', defaultContent: '-', class: 'text-center' },
+                { title: "{{ __('Content') }}", data: 'content', name: 'content', defaultContent: '-', class: 'text-center' },
                 { title: "{{ __('Action') }}", data: 'action', name: 'action', defaultContent: '-', class: 'text-center', searchable: false, orderable: false }
             ],
             drawCallback: function() {

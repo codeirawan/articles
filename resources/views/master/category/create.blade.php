@@ -1,29 +1,29 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create') }} {{ __('Position') }} | {{ config('app.name') }}
+    {{ __('Create') }} {{ __('Category') }} | {{ config('app.name') }}
 @endsection
 
 @section('subheader')
-    {{ __('Create') }} {{ __('Position') }}
+    {{ __('Create') }} {{ __('Category') }}
 @endsection
 
 @section('breadcrumb')
-    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.position.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Position') }}</a>
-    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.position.create') }}" class="kt-subheader__breadcrumbs-link">{{ __('Create') }} {{ __('Position') }}</a>
+    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.category.index') }}" class="kt-subheader__breadcrumbs-link">{{ __('Category') }}</a>
+    <span class="kt-subheader__breadcrumbs-separator"></span><a href="{{ route('master.category.create') }}" class="kt-subheader__breadcrumbs-link">{{ __('Create') }} {{ __('Category') }}</a>
 @endsection
 
 @section('content')
-<form class="kt-form" id="kt_form_1" action="{{ route('master.position.store') }}" method="POST">
+<form class="kt-form" id="kt_form_1" action="{{ route('master.category.store') }}" method="POST">
     @csrf
 
     <div class="kt-portlet" id="kt_page_portlet">
         <div class="kt-portlet__head kt-portlet__head--lg">
             <div class="kt-portlet__head-label">
-                <h3 class="kt-portlet__head-title">{{ __('Create') }} {{ __('Position') }}</h3>
+                <h3 class="kt-portlet__head-title">{{ __('Create') }} {{ __('Category') }}</h3>
             </div>
             <div class="kt-portlet__head-toolbar">
-                <a href="{{ route('master.position.index') }}" class="btn btn-secondary kt-margin-r-10">
+                <a href="{{ route('master.category.index') }}" class="btn btn-secondary kt-margin-r-10">
                     <i class="la la-arrow-left"></i>
                     <span class="kt-hidden-mobile">{{ __('Back') }}</span>
                 </a>

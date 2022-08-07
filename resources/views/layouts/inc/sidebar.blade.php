@@ -20,21 +20,6 @@
                     </a>
                 </li>
 
-                @permission(['view-recruitment'])
-                    <li class="kt-menu__section ">
-                        <h4 class="kt-menu__section-text">{{ __('Employee Management') }}</h4>
-                        <i class="kt-menu__section-icon flaticon-more-v2"></i>
-                    </li>
-                @endpermission
-                @permission('view-recruitment')
-                    <li class="kt-menu__item @if(Request::is('recruitment*')) kt-menu__item--here @endif" aria-haspopup="true">
-                        <a href="{{ route('recruitment.index') }}" class="kt-menu__link">
-                            <i class="kt-menu__link-icon fa fa-user-plus"></i>
-                            <span class="kt-menu__link-text">{{ __('Recruitment') }}</span>
-                        </a>
-                    </li>
-                @endpermission
-
                 @permission(['view-user', 'view-role'])
                     <li class="kt-menu__section ">
                         <h4 class="kt-menu__section-text">{{ __('User Management') }}</h4>
@@ -58,7 +43,7 @@
                     </li>
                 @endpermission
 
-                @permission(['view-product-category', 'view-product-unit', 'view-payment-method', 'view-position', 'view-resume-source', 'view-file-type'])
+                @permission(['view-category', 'view-article'])
                     <li class="kt-menu__section ">
                         <h4 class="kt-menu__section-text">{{ __('Master Data Management') }}</h4>
                         <i class="kt-menu__section-icon flaticon-more-v2"></i>
@@ -77,25 +62,21 @@
                                         <span class="kt-menu__link-text">{{ __('Master Data') }}</span>
                                     </span>
                                 </li>
+                                @permission('view-category')
                                 <li class="kt-menu__item @if(Request::is('master/category*')) kt-menu__item--here @endif" aria-haspopup="true">
                                     <a href="{{ route('master.category.index') }}" class="kt-menu__link">
                                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                         <span class="kt-menu__link-text">{{ __('Category') }}</span>
                                     </a>
                                 </li>
+                                @endpermission
+                                @permission('view-article')
                                 <li class="kt-menu__item @if(Request::is('master/article*')) kt-menu__item--here @endif" aria-haspopup="true">
                                     <a href="{{ route('master.article.index') }}" class="kt-menu__link">
                                         <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
                                         <span class="kt-menu__link-text">{{ __('Article') }}</span>
                                     </a>
                                 </li>
-                                @permission('view-position')
-                                    <li class="kt-menu__item @if(Request::is('master/position*')) kt-menu__item--here @endif" aria-haspopup="true">
-                                        <a href="{{ route('master.position.index') }}" class="kt-menu__link">
-                                            <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i>
-                                            <span class="kt-menu__link-text">{{ __('Position') }}</span>
-                                        </a>
-                                    </li>
                                 @endpermission
                             </ul>
                         </div>
